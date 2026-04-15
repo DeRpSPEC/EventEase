@@ -1,0 +1,48 @@
+@page
+@model EventEase.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row mb-3">
+    <div class="col">
+        <div class="card p-3">
+            <strong>Venues:</strong> @Model.VenueCount
+        </div>
+    </div>
+    <div class="col">
+        <div class="card p-3">
+            <strong>Events:</strong> @Model.EventCount
+        </div>
+    </div>
+    <div class="col">
+        <div class="card p-3">
+            <strong>Bookings:</strong> @Model.BookingCount
+        </div>
+    </div>
+</div>
+
+<h2>Upcoming Events</h2>
+
+@if (!Model.Events.Any())
+{
+    <p>No upcoming events.</p>
+}
+else
+{
+    <div class="list-group">
+        @foreach (var e in Model.Events)
+        {
+            <a class="list-group-item list-group-item-action" href="#">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@e.Name</h5>
+                    <small>@e.StartDate.ToString("g")</small>
+                </div>
+                <p class="mb-1">@e.Description</p>
+                <small class="text-muted">@e.Venue?.Name</small>
+            </a>
+        }
+    </div>
+}

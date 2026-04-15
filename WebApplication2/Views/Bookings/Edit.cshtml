@@ -1,0 +1,50 @@
+@model EventEase.Models.Booking
+@{
+    ViewData["Title"] = "Edit Booking";
+}
+
+<h1>Edit Booking</h1>
+
+@if (TempData["Errors"] != null)
+{
+    <div class="alert alert-danger">@TempData["Errors"]</div>
+}
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="BookingId" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="GuestName" class="control-label"></label>
+        <input asp-for="GuestName" class="form-control" />
+        <span asp-validation-for="GuestName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="GuestEmail" class="control-label"></label>
+        <input asp-for="GuestEmail" class="form-control" />
+        <span asp-validation-for="GuestEmail" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VenueId" class="control-label"></label>
+        <select asp-for="VenueId" asp-items="@(new SelectList(ViewData["VenueId"] as IEnumerable<dynamic>, "VenueId", "Name"))" class="form-control"></select>
+        <span asp-validation-for="VenueId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EventId" class="control-label"></label>
+        <select asp-for="EventId" asp-items="@(new SelectList(ViewData["EventId"] as IEnumerable<dynamic>, "EventId", "Name"))" class="form-control"></select>
+        <span asp-validation-for="EventId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

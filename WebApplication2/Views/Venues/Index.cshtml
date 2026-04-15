@@ -1,0 +1,38 @@
+@model IEnumerable<EventEase.Models.Venue>
+@{
+    ViewData["Title"] = "Venues";
+}
+
+<h1>Venues</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Capacity</th>
+            <th>Available</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Location</td>
+            <td>@item.Capacity</td>
+            <td>@(item.IsAvailable ? "Yes" : "No")</td>
+            <td>
+                <a class="btn btn-sm btn-secondary" asp-action="Details" asp-route-id="@item.VenueId">Details</a>
+                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.VenueId">Edit</a>
+                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.VenueId">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
